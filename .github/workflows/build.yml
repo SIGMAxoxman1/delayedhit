@@ -1,0 +1,60 @@
+name: Build Mod
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate fabric.mod.json
+        run: python3 -m json.tool src/main/resources/fabric.mod.json > /dev/null
+
+      - name: Validate mixins json
+        run: |
+          for f in src/main/resources/*.mixins.json; do
+            echo "Checking $f"
+            python3 -m json.tool "$f" > /dev/null
+          done
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
+
+      - name: Generate Gradle Wrapper if missing
+        run: |
+          if [ ! -f gradlew ]; then
+            gradle wrapper
+          fi
+
+      - name: Make wrapper executable
+        run: chmod +x gradlew
+
+      - name: Build
+        run: ./gradlew build --stacktrace
+
+      - name: Upload build artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sigma-mc
+          path: build/libs/*.jar
+
+      - name: Upload build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            build/reports/**
+            **/*.log
+          if-no-files-found: ignore
