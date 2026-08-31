@@ -12,11 +12,6 @@
   "entrypoints": {
     "client": [
       "com.sigma.sigmamc.SigmaMcClient"
-    ]
-  },
-
-  "mixins": [
-    "sigma_mc.mixins.json"
   ],
 
   "depends": {
