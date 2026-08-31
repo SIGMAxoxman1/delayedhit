@@ -4,14 +4,21 @@
   "version": "${version}",
   "name": "Sigma_mc",
   "description": "Delayed Hit Trainer",
-  "authors": ["SIGMAxoxman1"],
+  "authors": [
+    "SIGMAxoxman1"
+  ],
   "environment": "client",
+
   "entrypoints": {
-    "client": ["com.sigma.sigmamc.SigmaMcClient"]
-  "mixins": [
-  "sigma_mc.mixins.json"
-],
+    "client": [
+      "com.sigma.sigmamc.SigmaMcClient"
+    ]
   },
+
+  "mixins": [
+    "sigma_mc.mixins.json"
+  ],
+
   "depends": {
     "fabricloader": ">=0.17.2",
     "minecraft": "~1.21.11",
