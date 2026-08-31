@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "sigma_mc",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "Sigma_mc",
   "description": "Delayed Hit Trainer",
   "authors": [
