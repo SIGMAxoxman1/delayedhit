@@ -8,6 +8,9 @@
   "environment": "client",
   "entrypoints": {
     "client": ["com.sigma.sigmamc.SigmaMcClient"]
+  "mixins": [
+  "sigma_mc.mixins.json"
+],
   },
   "depends": {
     "fabricloader": ">=0.17.2",
