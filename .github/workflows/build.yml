@@ -23,7 +23,6 @@ jobs:
           if [ ! -f gradlew ]; then
             gradle wrapper
           fi
-
       - name: Make wrapper executable
         run: chmod +x gradlew
 
